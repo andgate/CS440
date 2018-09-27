@@ -1,14 +1,13 @@
 // Windows imports
-/*
 #include <windows.h>
 #include <gl/Gl.h>
 #include <gl/Glu.h>
-#include <iostream.h>
+#include <iostream>
 #include "glut.h"
-*/
+
 
 // Linux imports
-#include <GL/glut.h>
+//#include <GL/glut.h>
 
 void Sierpinski();
 void Display();
@@ -46,12 +45,13 @@ int main (int argc, char** argv)
 
 void Display()
 {
-  Sierpinski();
+	glClear(GL_COLOR_BUFFER_BIT);  // clear the screen
+	Sierpinski();
 }
 
 void Init()
 {
-	glClearColor(1.0, 1.0, 1.0, 0.0);
+  glClearColor(1.0, 1.0, 1.0, 0.0);
   glColor3f(0.0f,0.0f,0.0f);
   glPointSize(4.0);
   glMatrixMode(GL_PROJECTION);

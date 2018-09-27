@@ -1,15 +1,13 @@
 // Windows imports
-/*
 #include <windows.h>
 #include <math.h>
 #include <gl/Gl.h>
 #include <gl/Glu.h>
 #include "glut.h"
-*/
 
 // Linux imports
-#include <GL/glut.h>
-#include <math.h>
+//#include <GL/glut.h>
+//#include <math.h>
 
 void Display();
 void Init(void);
@@ -23,15 +21,15 @@ GLdouble A, B, C, D;  // values used for scaling and shifting
 
 int main (int argc, char** argv)
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(screenWidth, screenWidth);
-	glutInitWindowPosition(100,150);
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+  glutInitWindowSize(screenWidth, screenWidth);
+  glutInitWindowPosition(100,150);
 
-	glutCreateWindow("Dot Plot of a Function");
-   glutDisplayFunc(Display);
-   Init();
-	glutMainLoop();
+  glutCreateWindow("Dot Plot of a Function");
+  glutDisplayFunc(Display);
+  Init();
+  glutMainLoop();
 
   return 0;
 }

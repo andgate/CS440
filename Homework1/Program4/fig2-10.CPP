@@ -1,14 +1,11 @@
 // Windows imports
-/*
 #include <windows.h>
 #include <gl/Gl.h>
 #include <gl/Glu.h>
-#include <iostream.h>
 #include "glut.h"
-*/
 
 // Linux imports
-#include <GL/glut.h>
+//#include <GL/glut.h>
 
 
 void Display();
@@ -32,11 +29,18 @@ int main (int argc, char** argv)
 void Display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_LINE_STRIP);
       glVertex2i(20,10);
       glVertex2i(50,10);
       glVertex2i(20,80);
       glVertex2i(50,80);
+   glEnd();
+
+   glBegin(GL_LINE_LOOP);
+      glVertex2i(70,10);
+      glVertex2i(100,10);
+      glVertex2i(70,80);
+      glVertex2i(100,80);
    glEnd();
    glFlush();
 }
@@ -48,6 +52,6 @@ void Init()
    glPointSize(4.0);
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   gluOrtho2D(1.0,640.0,0.0,480.0);
+   gluOrtho2D(1.0,150.0,0.0,100.0);
 }
 
