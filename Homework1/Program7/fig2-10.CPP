@@ -1,11 +1,11 @@
 // Windows imports
-#include <windows.h>
-#include <gl/Gl.h>
-#include <gl/Glu.h>
-#include "glut.h"
+//#include <windows.h>
+//#include <gl/Gl.h>
+//#include <gl/Glu.h>
+//#include "glut.h"
 
 // Linux imports
-//#include <GL/glut.h>
+#include <GL/glut.h>
 
 
 void Display();
@@ -32,11 +32,6 @@ struct GLintPoint { int x, y; };
 
 void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 {
-	GLintPoint chimneyPoint = { peak.x - width/4, peak.y - height/4 };
-	GLint chimneyWidth = width/10;
-	GLint chimneyHeight = width/10;
-	GLint chWidth = width/10;
-
 	// Points for the shell of the house
 	GLintPoint p1 = { peak.x,             peak.y }; 
 	GLintPoint p2 = { peak.x + width / 2, peak.y - 3 * height /8 }; 
@@ -63,10 +58,11 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 	glEnd();*/
 
 	// Chimney Points
-	GLintPoint ch1 = { p5.x + (p1.x - p5.x)/4  , p5.y + (p1.y - p5.y)/4 };
-	GLintPoint ch2 = { ch1.x                   , peak.y };
-	GLintPoint ch3 = { p5.x + (p1.x - p5.x)*3/4, peak.y };
-	GLintPoint ch4 = { ch3.x                   , p5.y + (p1.y - p5.y)*3/4 };
+  int chimneyWidth = (p1.x - p5.x)/3;
+	GLintPoint ch1 = { p5.x + chimneyWidth , p5.y + (p1.y - p5.y)/3 };
+	GLintPoint ch2 = { ch1.x               , peak.y - height/32};
+	GLintPoint ch3 = { ch1.x + chimneyWidth, peak.y - height/32};
+	GLintPoint ch4 = { ch3.x               , p5.y + (p1.y - p5.y)*2/3 };
 
 	// draw the chimney
 	glBegin(GL_LINE_STRIP);
@@ -76,32 +72,47 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 		glVertex2i(ch4.x, ch4.y);
 	glEnd();
 
-	//// draw the door
-	//glBegin(GL_LINE_STRIP);
-	//	glVertex2i(50, 40);
-	//	glVertex2i(50, 80);
-	//	glVertex2i(60, 80);
-	//	glVertex2i(60, 40);
-	//glEnd();
+  // Door dimensions and points
+  int doorWidth  = width/5;
+  int doorHeight = height/2;
+  GLintPoint d1 = { p4.x + width/8  , p4.y };
+	GLintPoint d2 = { d1.x            , d1.y + doorHeight };
+	GLintPoint d3 = { d1.x + doorWidth, d2.y };
+	GLintPoint d4 = { d3.x            , d1.y };
 
-	//// draw the window
-	//glBegin(GL_LINE_LOOP);
-	//	glVertex2i(70, 75);
-	//	glVertex2i(70, 90);
-	//	glVertex2i(80, 90);
-	//	glVertex2i(80, 75);
-	//glEnd();
+	// draw the door
+	glBegin(GL_LINE_STRIP);
+		glVertex2i(d1.x, d1.y);
+		glVertex2i(d2.x, d2.y);
+		glVertex2i(d3.x, d3.y);
+		glVertex2i(d4.x, d4.y);
+	glEnd();
+
+
+  // Window size and points
+  int windowSize  = width/5;
+  GLintPoint w1 = { p4.x + width*5/8 , p4.y + height*7/16 };
+	GLintPoint w2 = { w1.x             , w1.y + windowSize };
+	GLintPoint w3 = { w1.x + windowSize, w2.y };
+	GLintPoint w4 = { w3.x             , w1.y };
+
+	// draw the window
+	glBegin(GL_LINE_LOOP);
+    glVertex2i(w1.x, w1.y);
+    glVertex2i(w2.x, w2.y);
+    glVertex2i(w3.x, w3.y);
+    glVertex2i(w4.x, w4.y);
+	glEnd();
 }
 
 void Display()
 {
-	GLintPoint p = {100, 100};
+	GLintPoint p = {100, 150};
+  int width = 75;
+  int height = 100;
 
 	glClear(GL_COLOR_BUFFER_BIT);
-	parameterizedHouse(p, 50, 50);
-	parameterizedHouse(p, 50, 50);
-	parameterizedHouse(p, 50, 50);
-	parameterizedHouse(p, 50, 50);
+	parameterizedHouse(p, width, height);
 	glFlush();
 }
 
