@@ -1,11 +1,11 @@
 // Windows imports
-//#include <windows.h>
-//#include <gl/Gl.h>
-//#include <gl/Glu.h>
-//#include "glut.h"
+#include <windows.h>
+#include <gl/Gl.h>
+#include <gl/Glu.h>
+#include "glut.h"
 
 // Linux imports
-#include <GL/glut.h>
+//#include <GL/glut.h>
 
 
 void Display();
@@ -58,7 +58,7 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 	glEnd();*/
 
 	// Chimney Points
-  int chimneyWidth = (p1.x - p5.x)/3;
+    int chimneyWidth = (p1.x - p5.x)/3;
 	GLintPoint ch1 = { p5.x + chimneyWidth , p5.y + (p1.y - p5.y)/3 };
 	GLintPoint ch2 = { ch1.x               , peak.y - height/32};
 	GLintPoint ch3 = { ch1.x + chimneyWidth, peak.y - height/32};
@@ -72,10 +72,10 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 		glVertex2i(ch4.x, ch4.y);
 	glEnd();
 
-  // Door dimensions and points
-  int doorWidth  = width/5;
-  int doorHeight = height/2;
-  GLintPoint d1 = { p4.x + width/8  , p4.y };
+    // Door dimensions and points
+    int doorWidth  = width/5;
+    int doorHeight = height/2;
+    GLintPoint d1 = { p4.x + width/8  , p4.y };
 	GLintPoint d2 = { d1.x            , d1.y + doorHeight };
 	GLintPoint d3 = { d1.x + doorWidth, d2.y };
 	GLintPoint d4 = { d3.x            , d1.y };
@@ -89,9 +89,9 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 	glEnd();
 
 
-  // Window size and points
-  int windowSize  = width/5;
-  GLintPoint w1 = { p4.x + width*5/8 , p4.y + height*7/16 };
+    // Window size and points
+    int windowSize  = width/5;
+    GLintPoint w1 = { p4.x + width*5/8 , p4.y + height*7/16 };
 	GLintPoint w2 = { w1.x             , w1.y + windowSize };
 	GLintPoint w3 = { w1.x + windowSize, w2.y };
 	GLintPoint w4 = { w3.x             , w1.y };
@@ -107,12 +107,27 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 
 void Display()
 {
-	GLintPoint p = {100, 150};
-  int width = 75;
-  int height = 100;
-
 	glClear(GL_COLOR_BUFFER_BIT);
-	parameterizedHouse(p, width, height);
+
+	int width = 100;
+    int height = 100;
+	GLintPoint p1 = {width/1.5, 475};
+	parameterizedHouse(p1, width, height);
+
+	GLintPoint p2 = {p1.x+width, p1.y};
+	int width2 = width / 2;
+	parameterizedHouse(p2, width2, height);
+
+	GLintPoint p3 = {p2.x+width, p2.y};
+	int width3 = width;
+	int height3 = height / 2;
+	parameterizedHouse(p3, width3, height3);
+
+	GLintPoint p4 = {p1.x, p1.y + height};
+	int width4 = -width;
+	int height4 = height;
+	parameterizedHouse(p4, width4, height4);
+
 	glFlush();
 }
 
@@ -123,6 +138,6 @@ void Init()
 	glPointSize(4.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(1.0,200.0,0.0,200.0);
+	gluOrtho2D(1.0,640.0,0.0,480.0);
 }
 
