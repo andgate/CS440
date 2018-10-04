@@ -90,18 +90,19 @@ void parameterizedHouse(GLintPoint peak, GLint width, GLint height)
 
 
     // Window size and points
-    int windowSize  = width/5;
+    int windowWidth  = width/5;
+	int windowHeight  = height/5;
     GLintPoint w1 = { p4.x + width*5/8 , p4.y + height*7/16 };
-	GLintPoint w2 = { w1.x             , w1.y + windowSize };
-	GLintPoint w3 = { w1.x + windowSize, w2.y };
+	GLintPoint w2 = { w1.x             , w1.y + windowHeight };
+	GLintPoint w3 = { w1.x + windowWidth, w2.y };
 	GLintPoint w4 = { w3.x             , w1.y };
 
 	// draw the window
 	glBegin(GL_LINE_LOOP);
-    glVertex2i(w1.x, w1.y);
-    glVertex2i(w2.x, w2.y);
-    glVertex2i(w3.x, w3.y);
-    glVertex2i(w4.x, w4.y);
+		glVertex2i(w1.x, w1.y);
+		glVertex2i(w2.x, w2.y);
+		glVertex2i(w3.x, w3.y);
+		glVertex2i(w4.x, w4.y);
 	glEnd();
 }
 
@@ -122,11 +123,6 @@ void Display()
 	int width3 = width;
 	int height3 = height / 2;
 	parameterizedHouse(p3, width3, height3);
-
-	GLintPoint p4 = {p1.x, p1.y + height};
-	int width4 = -width;
-	int height4 = height;
-	parameterizedHouse(p4, width4, height4);
 
 	glFlush();
 }
